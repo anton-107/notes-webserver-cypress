@@ -1,3 +1,7 @@
+import cucumber from "cypress-cucumber-preprocessor";
+import * as browserify from "@cypress/browserify-preprocessor";
+import * as resolve from "resolve";
+
 /// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -16,7 +20,12 @@
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
-module.exports = (/* on, config */) => {
+module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
+  const options = {
+    ...browserify.defaultOptions,
+    typescript: resolve.sync("typescript", { baseDir: config.projectRoot }),
+  };
+  on("file:preprocessor", cucumber(options));
 };
