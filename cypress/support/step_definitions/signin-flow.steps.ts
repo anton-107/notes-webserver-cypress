@@ -1,14 +1,23 @@
-// describe("My First Test", () => {
-//   it("Visits home page", () => {
-//     cy.visit("http://localhost:3000/home");
-//   });
-// });
+import { Then, When, And } from "cypress-cucumber-preprocessor/steps";
 
-import { Given, Then } from "cypress-cucumber-preprocessor/steps";
-
-Given("I open home page", () => {
-  cy.visit("http://localhost:3000/home");
+When("I visit {string} page", (path) => {
+  cy.visit(`http://localhost:3000${path}`);
 });
-Then("I see {string} in the title", (title) => {
-  cy.title().should("equal", title);
+Then("I see {string} element", (elementID) => {
+  cy.get(`*[data-testid=${elementID}]`)
+    .as("currentElement")
+    .should("be.visible");
+});
+When("I click on it", () => {
+  cy.get("@currentElement").click();
+});
+Then("I am navigated to {string} page", (path) => {
+  cy.url().should("eq", `http://localhost:3000${path}`);
+});
+And("I focus on it and type {string}", (value) => {
+  cy.get("@currentElement").focus();
+  cy.get("@currentElement").type(value);
+});
+And("I press 'Enter' on keyboard", () => {
+  cy.get("@currentElement").type("{enter}");
 });
