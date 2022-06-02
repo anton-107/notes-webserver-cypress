@@ -8,6 +8,9 @@ Then("I see {string} element", (elementID) => {
     .as("currentElement")
     .should("be.visible");
 });
+And("I do not see {string} element", (elementID) => {
+  cy.get(`*[data-testid=${elementID}]`).should("not.exist");
+});
 When("I click on it", () => {
   cy.get("@currentElement").click();
 });
@@ -20,4 +23,8 @@ And("I focus on it and type {string}", (value) => {
 });
 And("I press 'Enter' on keyboard", () => {
   cy.get("@currentElement").type("{enter}");
+});
+
+And("it has inner text of {string}", (value) => {
+  cy.get("@currentElement").should("have.text", value);
 });
