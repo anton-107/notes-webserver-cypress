@@ -1,10 +1,8 @@
 import { Then, When, And } from "cypress-cucumber-preprocessor/steps";
 
-When("I visit {string} page", (path) => {
-  cy.visit(`http://localhost:3000${path}`);
-});
 Then("I see {string} element", (elementID) => {
   cy.get(`*[data-testid=${elementID}]`)
+    .first()
     .as("currentElement")
     .should("be.visible");
 });
