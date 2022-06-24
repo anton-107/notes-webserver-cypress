@@ -13,7 +13,7 @@ When("I click on it", () => {
   cy.get("@currentElement").click();
 });
 Then("I am navigated to {string} page", (path) => {
-  cy.url().should("eq", `http://localhost:3000${path}`);
+  cy.url().should("contain", path);
 });
 And("I focus on it and type {string}", (value) => {
   cy.get("@currentElement").focus();
