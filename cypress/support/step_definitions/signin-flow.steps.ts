@@ -12,8 +12,10 @@ And("I do not see {string} element", (elementID) => {
 When("I click on it", () => {
   cy.get("@currentElement").click();
 });
-Then("I am navigated to {string} page", (path) => {
-  cy.url().should("contain", path);
+Then("I am navigated to {} page", (path: string) => {
+  const normalizedPath = path.replace(/'/g, "");
+  const regex = normalizedPath.replace("{notebook-id}", "[A-z0-9]{1,32}");
+  cy.url().should("match", new RegExp(regex));
 });
 And("I focus on it and type {string}", (value) => {
   cy.get("@currentElement").focus();

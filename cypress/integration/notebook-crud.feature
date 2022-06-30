@@ -14,3 +14,8 @@ Feature: Notebooks handling
       Then I am navigated to '/home' page
       Then I see 'notebook-name' element
       And it has inner text of 'Health and fitness'
+      When I click on it
+      Then I am navigated to '/notebook/{notebook-id}' page
+      Then I see 'notebook-name' element
+      And it has inner text of 'Health and fitness'
+      And I see 'delete-notebook-button' element
