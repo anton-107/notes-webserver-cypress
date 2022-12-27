@@ -1,4 +1,3 @@
-import cucumber from "cypress-cucumber-preprocessor";
 import * as browserify from "@cypress/browserify-preprocessor";
 import * as resolve from "resolve";
 
@@ -27,5 +26,4 @@ module.exports = (on, config) => {
     ...browserify.defaultOptions,
     typescript: resolve.sync("typescript", { baseDir: config.projectRoot }),
   };
-  on("file:preprocessor", cucumber(options));
 };
