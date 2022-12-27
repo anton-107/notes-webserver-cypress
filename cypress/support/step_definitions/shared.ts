@@ -1,5 +1,3 @@
-import { Given, When } from "cypress-cucumber-preprocessor/steps";
-
 Given(
   "I am logged in as {string} using password {string}",
   (user: string, password: string) => {

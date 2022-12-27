@@ -1,5 +1,3 @@
-import { Then, When, And } from "cypress-cucumber-preprocessor/steps";
-
 Then("I see {string} element", (elementID) => {
   cy.get(`*[data-testid=${elementID}]`)
     .first()
